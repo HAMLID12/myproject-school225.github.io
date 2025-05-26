@@ -9,19 +9,22 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #f5f5f5;
+            background-color: #1a1a2e;
+            background-image: radial-gradient(circle at 25% 50%, #4a4a8a 0%, #1a1a2e 100%);
             overflow: hidden;
-            color: #333;
+            color: #ecf0f1;
+            min-height: 100vh;
         }
 
         .container {
             display: flex;
             height: 100vh;
             width: 100%;
+            position: relative;
         }
 
         /* Левая панель инструментов */
@@ -29,27 +32,46 @@
             width: 250px;
             background-color: #2c3e50;
             color: white;
-            padding: 20px;
+            padding: 25px;
             display: flex;
             flex-direction: column;
             overflow-y: auto;
             z-index: 100;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
         }
 
         .logo {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: bold;
             margin-bottom: 30px;
             text-align: center;
             color: #ecf0f1;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            border-radius: 2px;
         }
 
         .tool-button {
-            background-color: #3498db;
+            background: linear-gradient(45deg, #3498db, #2980b9);
             color: white;
             border: none;
-            padding: 12px 15px;
-            border-radius: 5px;
+            padding: 14px 20px;
+            border-radius: 8px;
             margin-bottom: 15px;
             cursor: pointer;
             font-size: 16px;
@@ -57,50 +79,53 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .tool-button i {
-            margin-right: 10px;
-            font-size: 18px;
+            margin-right: 12px;
+            font-size: 20px;
         }
 
         .tool-button:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
         }
 
         .tool-button:active {
-            transform: translateY(0);
+            transform: translateY(1px);
         }
 
         /* Панель свойств объекта (справа) */
         .properties-panel {
             width: 280px;
-            background-color: #ecf0f1;
-            padding: 20px;
+            background-color: #2c3e50;
+            padding: 25px;
             overflow-y: auto;
-            border-left: 1px solid #ddd;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
         }
 
         .property-group {
-            margin-bottom: 20px;
-            background-color: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
         }
 
         .property-title {
-            font-weight: bold;
+            font-weight: 600;
             margin-bottom: 15px;
             font-size: 16px;
-            color: #2c3e50;
-            border-bottom: 1px solid #eee;
+            color: #ecf0f1;
             padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .property-control {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .property-control:last-child {
@@ -109,38 +134,44 @@
 
         label {
             display: block;
-            margin-bottom: 5px;
-            color: #555;
+            margin-bottom: 8px;
+            color: #bdc3c7;
             font-size: 14px;
         }
 
         input, select {
             width: 100%;
-            padding: 8px 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 10px 12px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
             font-size: 14px;
-            transition: border 0.3s;
+            color: #ecf0f1;
+            transition: all 0.3s;
         }
 
         input:focus, select:focus {
             border-color: #3498db;
             outline: none;
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
         }
 
         .color-picker {
             width: 100%;
-            height: 40px;
+            height: 45px;
             padding: 0;
-            border: 1px solid #ddd;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
             cursor: pointer;
+            background: transparent;
         }
 
         /* Основной холст */
         .canvas-container {
             flex-grow: 1;
             position: relative;
-            background-color: #d9d9d9;
+            background-color: rgba(0, 0, 0, 0.2);
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -152,7 +183,7 @@
             position: relative;
             width: 1200px;
             height: 800px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
             transform-origin: center;
             overflow: visible;
             transition: transform 0.2s;
@@ -164,36 +195,41 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
-            padding: 25px;
-            width: 500px;
+            background-color: #2c3e50;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            width: 550px;
             max-height: 80vh;
             overflow-y: auto;
             z-index: 1000;
             display: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .dialog-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 15px;
         }
 
         .dialog-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #2c3e50;
+            font-size: 22px;
+            font-weight: 600;
+            color: #ecf0f1;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .close-dialog {
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 26px;
             cursor: pointer;
             color: #7f8c8d;
             transition: color 0.3s;
@@ -206,7 +242,7 @@
         .shapes-list {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            gap: 20px;
         }
 
         .shape-item {
@@ -214,31 +250,32 @@
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 10px;
             transition: all 0.3s;
-            border: 1px solid transparent;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .shape-item:hover {
-            background-color: #f8f9fa;
-            transform: translateY(-3px);
-            border-color: #e6e6e6;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
 
         .shape-preview {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .shape-name {
-            font-size: 14px;
+            font-size: 15px;
             text-align: center;
-            color: #2c3e50;
+            color: #ecf0f1;
         }
 
         /* Стили для объектов на холсте */
@@ -249,49 +286,52 @@
         }
 
         .canvas-element.selected {
-            outline: 2px solid #3498db;
+            outline: 3px solid #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
         }
 
         .resize-handle {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #3498db;
-            border: 1px solid white;
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border: 2px solid white;
             border-radius: 50%;
             z-index: 10;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .resize-handle.top-left {
-            top: -5px;
-            left: -5px;
+            top: -6px;
+            left: -6px;
             cursor: nwse-resize;
         }
 
         .resize-handle.top-right {
-            top: -5px;
-            right: -5px;
+            top: -6px;
+            right: -6px;
             cursor: nesw-resize;
         }
 
         .resize-handle.bottom-left {
-            bottom: -5px;
-            left: -5px;
+            bottom: -6px;
+            left: -6px;
             cursor: nesw-resize;
         }
 
         .resize-handle.bottom-right {
-            bottom: -5px;
-            right: -5px;
+            bottom: -6px;
+            right: -6px;
             cursor: nwse-resize;
         }
 
         .canvas-text {
-            min-width: 50px;
-            min-height: 20px;
-            padding: 5px;
+            min-width: 60px;
+            min-height: 30px;
+            padding: 8px;
             border: 1px dashed transparent;
             outline: none;
+            color: #333;
         }
 
         .canvas-text:hover {
@@ -311,43 +351,47 @@
         /* Контролы масштабирования */
         .zoom-controls {
             position: absolute;
-            right: 20px;
-            bottom: 20px;
+            right: 25px;
+            bottom: 25px;
             display: flex;
-            gap: 10px;
+            gap: 12px;
             z-index: 50;
         }
 
         .zoom-btn {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background-color: white;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             border: none;
             transition: all 0.3s;
         }
 
         .zoom-btn:hover {
-            background-color: #f8f9fa;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
 
         .zoom-level {
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: white;
-            padding: 0 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            min-width: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0 18px;
+            border-radius: 25px;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            min-width: 90px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Стили для блокировки заднего фона при открытии диалога */
@@ -357,10 +401,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
             z-index: 999;
             display: none;
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(4px);
         }
 
         /* Скрытый элемент для загрузки файлов */
@@ -370,74 +414,88 @@
 
         /* Стили для кнопки удаления */
         .delete-button {
-            background-color: #e74c3c;
-            margin-top: 10px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            margin-top: 15px;
             transition: all 0.3s;
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 12px 18px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 15px;
             width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .delete-button:hover {
-            background-color: #c0392b;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
         /* Заголовок панели свойств */
         .properties-header {
-            margin-bottom: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #2c3e50;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ddd;
+            margin-bottom: 25px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #ecf0f1;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
-
+        
         /* Сообщение при отсутствии выделенного элемента */
         .no-selection-message {
-            color: #7f8c8d;
+            color: #bdc3c7;
             font-style: italic;
             text-align: center;
             margin-top: 50px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            padding: 25px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
         }
         
         /* Дополнительные стили для кнопок в панели свойств */
         .property-btn-group {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
         
         .property-btn {
             flex: 1;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: #f8f9fa;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ecf0f1;
             cursor: pointer;
             transition: all 0.3s;
         }
         
         .property-btn:hover {
-            background-color: #e9ecef;
+            background-color: rgba(255, 255, 255, 0.2);
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <!-- Левая панель инструментов -->
         <div class="sidebar">
             <div class="logo">Конструктор макета</div>
-            <button class="tool-button" id="create-text">Создать текст</button>
-            <button class="tool-button" id="create-shape">Добавить фигуру</button>
-            <button class="tool-button" id="import-image">Импортировать изображение</button>
+            <button class="tool-button" id="create-text">
+                <i>✏️</i> Создать текст
+            </button>
+            <button class="tool-button" id="create-shape">
+                <i>🔷</i> Добавить фигуру
+            </button>
+            <button class="tool-button" id="import-image">
+                <i>🖼️</i> Импортировать изображение
+            </button>
             <input type="file" id="file-input" accept="image/*">
         </div>
 
@@ -473,40 +531,60 @@
         <div class="shapes-list">
             <div class="shape-item" data-shape="rectangle">
                 <div class="shape-preview">
-                    <div style="width: 50px; height: 30px; background-color: #3498db;"></div>
+                    <div style="width: 60px; height: 40px; background: linear-gradient(45deg, #3498db, #2980b9); border-radius: 5px;"></div>
                 </div>
                 <div class="shape-name">Прямоугольник</div>
             </div>
             <div class="shape-item" data-shape="circle">
                 <div class="shape-preview">
-                    <div style="width: 40px; height: 40px; background-color: #2ecc71; border-radius: 50%;"></div>
+                    <div style="width: 50px; height: 50px; background: linear-gradient(45deg, #2ecc71, #27ae60); border-radius: 50%;"></div>
                 </div>
                 <div class="shape-name">Круг</div>
             </div>
             <div class="shape-item" data-shape="triangle">
                 <div class="shape-preview">
-                    <div style="width: 0; height: 0; border-left: 25px solid transparent; border-right: 25px solid transparent; border-bottom: 40px solid #e74c3c;"></div>
+                    <svg width="60" height="60" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <polygon points="50,0 0,100 100,100" fill="url(#triangleGradient)" />
+                        <defs>
+                            <linearGradient id="triangleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#e74c3c" />
+                                <stop offset="100%" stop-color="#c0392b" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
                 </div>
                 <div class="shape-name">Треугольник</div>
             </div>
             <div class="shape-item" data-shape="ellipse">
                 <div class="shape-preview">
-                    <div style="width: 50px; height: 30px; background-color: #f39c12; border-radius: 50%;"></div>
+                    <div style="width: 60px; height: 40px; background: linear-gradient(45deg, #f39c12, #e67e22); border-radius: 50%;"></div>
                 </div>
                 <div class="shape-name">Эллипс</div>
             </div>
             <div class="shape-item" data-shape="star">
                 <div class="shape-preview">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="#9b59b6">
-                        <path d="M12 0l3.09 6.26L22 7.27l-5 4.87 1.18 6.88L12 16l-6.18 3.02L7 12.14 2 7.27l6.91-1.01L12 0z"/>
+                    <svg width="50" height="50" viewBox="0 0 24 24">
+                        <path d="M12 0l3.09 6.26L22 7.27l-5 4.87 1.18 6.88L12 16l-6.18 3.02L7 12.14 2 7.27l6.91-1.01L12 0z" fill="url(#starGradient)"/>
+                        <defs>
+                            <linearGradient id="starGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#9b59b6" />
+                                <stop offset="100%" stop-color="#8e44ad" />
+                            </linearGradient>
+                        </defs>
                     </svg>
                 </div>
                 <div class="shape-name">Звезда</div>
             </div>
             <div class="shape-item" data-shape="hexagon">
                 <div class="shape-preview">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="#1abc9c">
-                        <path d="M21,12l-4.5,7.8L7.5,19.8L3,12l4.5-7.8L16.5,4.2L21,12z"/>
+                    <svg width="50" height="50" viewBox="0 0 24 24">
+                        <path d="M21,12l-4.5,7.8L7.5,19.8L3,12l4.5-7.8L16.5,4.2L21,12z" fill="url(#hexagonGradient)"/>
+                        <defs>
+                            <linearGradient id="hexagonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#1abc9c" />
+                                <stop offset="100%" stop-color="#16a085" />
+                            </linearGradient>
+                        </defs>
                     </svg>
                 </div>
                 <div class="shape-name">Шестиугольник</div>
@@ -605,12 +683,16 @@
                 textElement.style.left = '100px';
                 textElement.style.top = '100px';
                 textElement.style.color = '#000000';
-                textElement.style.fontSize = '16px';
-                textElement.style.fontFamily = 'Arial';
+                textElement.style.fontSize = '18px';
+                textElement.style.fontFamily = 'Montserrat';
                 textElement.style.width = 'auto';
-                textElement.style.minWidth = '100px';
+                textElement.style.minWidth = '120px';
                 textElement.style.height = 'auto';
-                textElement.style.minHeight = '30px';
+                textElement.style.minHeight = '40px';
+                textElement.style.padding = '10px';
+                textElement.style.borderRadius = '5px';
+                textElement.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                textElement.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
                 textElement.innerText = 'Двойной клик для редактирования';
                 
                 canvas.appendChild(textElement);
@@ -633,23 +715,24 @@
                 const shapeElement = document.createElement('div');
                 shapeElement.id = id;
                 shapeElement.className = 'canvas-element canvas-shape';
-                shapeElement.style.left = '100px';
-                shapeElement.style.top = '100px';
-                shapeElement.style.width = '100px';
-                shapeElement.style.height = '100px';
+                shapeElement.style.left = '150px';
+                shapeElement.style.top = '150px';
+                shapeElement.style.width = '120px';
+                shapeElement.style.height = '120px';
+                shapeElement.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
                 
-                let shapeStyle = '';
-                let backgroundColor = getRandomColor();
+                let backgroundColor = getRandomGradient();
                 
                 switch(shapeType) {
                     case 'rectangle':
-                        shapeStyle = `background-color: ${backgroundColor};`;
+                        shapeElement.style.background = backgroundColor;
+                        shapeElement.style.borderRadius = '8px';
                         break;
                     case 'circle':
-                        shapeStyle = `background-color: ${backgroundColor}; border-radius: 50%;`;
+                        shapeElement.style.background = backgroundColor;
+                        shapeElement.style.borderRadius = '50%';
                         break;
                     case 'triangle':
-                        // Создаем SVG для треугольника
                         shapeElement.innerHTML = `
                             <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
                                 <polygon points="50,0 0,100 100,100" fill="${backgroundColor}" />
@@ -657,11 +740,11 @@
                         `;
                         break;
                     case 'ellipse':
-                        shapeStyle = `background-color: ${backgroundColor}; border-radius: 50%;`;
-                        shapeElement.style.height = '60px'; // Эллипс ниже чем ширина
+                        shapeElement.style.background = backgroundColor;
+                        shapeElement.style.borderRadius = '50%';
+                        shapeElement.style.height = '80px';
                         break;
                     case 'star':
-                        // Создаем SVG для звезды
                         shapeElement.innerHTML = `
                             <svg width="100%" height="100%" viewBox="0 0 50 50" preserveAspectRatio="none">
                                 <polygon points="25,5 10,40 40,20 10,20 40,40" fill="${backgroundColor}" />
@@ -669,7 +752,6 @@
                         `;
                         break;
                     case 'hexagon':
-                        // Создаем SVG для шестиугольника
                         shapeElement.innerHTML = `
                             <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
                                 <polygon points="25,0 75,0 100,50 75,100 25,100 0,50" fill="${backgroundColor}" />
@@ -677,11 +759,7 @@
                         `;
                         break;
                     default:
-                        shapeStyle = `background-color: ${backgroundColor};`;
-                }
-                
-                if (shapeStyle) {
-                    shapeElement.style.cssText += shapeStyle;
+                        shapeElement.style.background = backgroundColor;
                 }
                 
                 canvas.appendChild(shapeElement);
@@ -712,10 +790,12 @@
                         imageElement.id = id;
                         imageElement.className = 'canvas-element canvas-image';
                         imageElement.src = event.target.result;
-                        imageElement.style.left = '100px';
-                        imageElement.style.top = '100px';
+                        imageElement.style.left = '150px';
+                        imageElement.style.top = '150px';
                         imageElement.style.width = '200px';
                         imageElement.style.height = 'auto';
+                        imageElement.style.borderRadius = '8px';
+                        imageElement.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
                         
                         canvas.appendChild(imageElement);
                         
@@ -838,7 +918,7 @@
                 }
                 
                 // Минимальные размеры
-                const minSize = 20;
+                const minSize = 30;
                 if (newWidth >= minSize) {
                     selectedElement.style.width = `${newWidth}px`;
                     selectedElement.style.left = `${newLeft}px`;
@@ -964,15 +1044,18 @@
                     const fontSize = parseInt(style.fontSize);
                     const fontFamily = style.fontFamily.split(',')[0].replace(/['"]+/g, '');
                     const color = rgbToHex(style.color);
+                    const bgColor = rgbToHex(style.backgroundColor);
                     
                     // Контролы для свойств текста
                     const fontSizeControl = createPropertyControl('Размер шрифта (px)', 'number', 'font-size-input', fontSize);
                     const fontFamilyControl = createFontFamilyControl(fontFamily);
                     const colorControl = createColorControl('Цвет текста', 'text-color-input', color);
+                    const bgColorControl = createColorControl('Цвет фона', 'bg-color-input', bgColor);
                     
                     fontGroup.appendChild(fontSizeControl);
                     fontGroup.appendChild(fontFamilyControl);
                     fontGroup.appendChild(colorControl);
+                    fontGroup.appendChild(bgColorControl);
                     propertiesContent.appendChild(fontGroup);
                     
                     // Обработчики изменений
@@ -987,6 +1070,10 @@
                     document.getElementById('text-color-input').addEventListener('change', function() {
                         selectedElement.style.color = this.value;
                     });
+                    
+                    document.getElementById('bg-color-input').addEventListener('change', function() {
+                        selectedElement.style.backgroundColor = this.value;
+                    });
                 }
                 
                 if (elementData.type === 'shape') {
@@ -994,7 +1081,7 @@
                     const shapeGroup = createPropertyGroup('Фигура');
                     
                     // Получаем цвет фигуры
-                    let color = elementData.color || '#3498db';
+                    let color = elementData.color || getRandomGradient();
                     
                     // Контрол для изменения цвета фигуры
                     const colorControl = createColorControl('Цвет фигуры', 'shape-color-input', color);
@@ -1009,7 +1096,7 @@
                         
                         // Обновляем цвет в зависимости от типа фигуры
                         if (elementData.shape === 'rectangle' || elementData.shape === 'circle' || elementData.shape === 'ellipse') {
-                            selectedElement.style.backgroundColor = newColor;
+                            selectedElement.style.background = newColor;
                         } else {
                             // Для SVG-фигур (треугольник, звезда, шестиугольник)
                             const svgPolygon = selectedElement.querySelector('polygon');
@@ -1117,7 +1204,7 @@
                 input.id = inputId;
                 input.value = value;
                 if (inputType === 'number') {
-                    input.min = 0;
+                    input.min = 10;
                 }
                 
                 control.appendChild(label);
@@ -1157,7 +1244,11 @@
                 const select = document.createElement('select');
                 select.id = 'font-family-input';
                 
-                const fonts = ['Arial', 'Verdana', 'Times New Roman', 'Courier New', 'Georgia', 'Tahoma', 'Trebuchet MS'];
+                const fonts = [
+                    'Montserrat', 'Arial', 'Verdana', 'Times New Roman', 
+                    'Courier New', 'Georgia', 'Tahoma', 'Trebuchet MS',
+                    'Roboto', 'Open Sans', 'Lato', 'Poppins'
+                ];
                 
                 fonts.forEach(font => {
                     const option = document.createElement('option');
@@ -1200,7 +1291,7 @@
                 if (rgb.startsWith('#')) return rgb;
                 
                 // Извлекаем числа из строки RGB
-                const rgbMatch = rgb.match(/^rgb\s*$\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*$$/i);
+                const rgbMatch = rgb.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
                 if (!rgbMatch) return '#000000';
                 
                 function hex(x) {
@@ -1210,14 +1301,19 @@
                 return '#' + hex(rgbMatch[1]) + hex(rgbMatch[2]) + hex(rgbMatch[3]);
             }
             
-            // Генерация случайного цвета
-            function getRandomColor() {
-                const letters = '0123456789ABCDEF';
-                let color = '#';
-                for (let i = 0; i < 6; i++) {
-                    color += letters[Math.floor(Math.random() * 16)];
-                }
-                return color;
+            // Генерация случайного градиента
+            function getRandomGradient() {
+                const colors = [
+                    ['#3498db', '#2980b9'], // синий
+                    ['#2ecc71', '#27ae60'], // зеленый
+                    ['#e74c3c', '#c0392b'], // красный
+                    ['#f39c12', '#e67e22'], // оранжевый
+                    ['#9b59b6', '#8e44ad'], // фиолетовый
+                    ['#1abc9c', '#16a085']  // бирюзовый
+                ];
+                
+                const randomColors = colors[Math.floor(Math.random() * colors.length)];
+                return `linear-gradient(45deg, ${randomColors[0]}, ${randomColors[1]})`;
             }
             
             // Инициализация приложения
